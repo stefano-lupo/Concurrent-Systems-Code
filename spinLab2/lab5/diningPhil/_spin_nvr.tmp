@@ -1,0 +1,7 @@
+never starvation {    /* !(<> ((((((ammount_eaten[0]!=0)) || ((ammount_eaten[1]!=0))) || ((ammount_eaten[2]!=0))) || ((ammount_eaten[3]!=0))) || ((ammount_eaten[4]==0)))) */
+accept_init:
+T0_init:
+	do
+	:: (! (((((((ammount_eaten[0]!=0)) || ((ammount_eaten[1]!=0))) || ((ammount_eaten[2]!=0))) || ((ammount_eaten[3]!=0))) || ((ammount_eaten[4]==0))))) -> goto T0_init
+	od;
+}

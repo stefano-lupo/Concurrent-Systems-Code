@@ -1,0 +1,83 @@
+never starvation {    /* !(! ([] (((! (hungry[0])) || (<> (eating[0]))) && ((! (hungry[1])) || (<> (eating[1])))))) */
+T0_init:
+	do
+	:: ((((! (hungry[0])) && (! (hungry[1]))) || ((((! (hungry[1])) && (eating[0])) || ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))))))) -> goto accept_S345
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T1_S402
+	:: ((((! (hungry[1]))) || ((eating[1])))) -> goto T0_S527
+	:: (1) -> goto T0_S560
+	od;
+accept_S345:
+	do
+	:: ((((! (hungry[0])) && (! (hungry[1]))) || ((((! (hungry[1])) && (eating[0])) || ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))))))) -> goto T0_init
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T0_S402
+	:: ((((! (hungry[1]))) || ((eating[1])))) -> goto T0_S527
+	:: (1) -> goto T0_S560
+	od;
+accept_S402:
+	do
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T0_S402
+	:: ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))) -> goto T0_init
+	:: ((eating[1])) -> goto T0_S527
+	:: (1) -> goto T0_S560
+	od;
+accept_S527:
+	do
+	:: ((((! (hungry[1])) && (eating[0])) || ((eating[0]) && (eating[1])))) -> goto T0_init
+	:: ((eating[0])) -> goto T0_S402
+	:: ((((! (hungry[1]))) || ((eating[1])))) -> goto T0_S527
+	:: (1) -> goto T0_S560
+	od;
+accept_S560:
+	do
+	:: ((eating[0])) -> goto T0_S402
+	:: ((eating[0]) && (eating[1])) -> goto T0_init
+	:: ((eating[1])) -> goto T0_S527
+	:: (1) -> goto T0_S560
+	od;
+T1_S402:
+	do
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T1_S402
+	:: ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))) -> goto accept_S345
+	:: ((eating[1])) -> goto accept_S527
+	:: ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))) -> goto accept_S402
+	:: (1) -> goto T1_S560
+	:: ((eating[1])) -> goto accept_S560
+	od;
+T1_S560:
+	do
+	:: ((eating[0])) -> goto T1_S402
+	:: ((eating[0]) && (eating[1])) -> goto accept_S345
+	:: ((eating[1])) -> goto accept_S527
+	:: (1) -> goto T1_S560
+	:: ((eating[0]) && (eating[1])) -> goto accept_S402
+	:: ((eating[1])) -> goto accept_S560
+	od;
+T0_S402:
+	do
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T1_S402
+	:: ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))) -> goto accept_S345
+	:: ((eating[1])) -> goto T0_S527
+	:: ((((! (hungry[0])) && (eating[1])) || ((eating[0]) && (eating[1])))) -> goto accept_S402
+	:: (1) -> goto T0_S560
+	od;
+T0_S527:
+	do
+	:: ((((! (hungry[1])) && (eating[0])) || ((eating[0]) && (eating[1])))) -> goto accept_S345
+	:: ((eating[0])) -> goto T1_S402
+	:: ((((! (hungry[1]))) || ((eating[1])))) -> goto T0_S527
+	:: ((((! (hungry[1])) && (eating[0])) || ((eating[0]) && (eating[1])))) -> goto accept_S527
+	:: ((eating[0])) -> goto T1_S560
+	:: (1) -> goto T0_S560
+	od;
+T0_S560:
+	do
+	:: ((eating[0])) -> goto T1_S402
+	:: ((eating[0]) && (eating[1])) -> goto accept_S345
+	:: ((eating[1])) -> goto T0_S527
+	:: ((eating[0])) -> goto T1_S560
+	:: ((eating[0]) && (eating[1])) -> goto accept_S402
+	:: (1) -> goto T0_S560
+	:: ((eating[0]) && (eating[1])) -> goto accept_S527
+	:: ((eating[0]) && (eating[1])) -> goto accept_S560
+	od;
+}

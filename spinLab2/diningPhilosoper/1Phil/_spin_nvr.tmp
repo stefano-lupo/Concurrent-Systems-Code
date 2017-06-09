@@ -1,0 +1,23 @@
+never starvation {    /* !(! ([] ((! (hungry[0])) || (<> (eating[0]))))) */
+T0_init:
+	do
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto accept_S20
+	:: (1) -> goto T0_S27
+	od;
+accept_S20:
+	do
+	:: ((((! (hungry[0]))) || ((eating[0])))) -> goto T0_init
+	:: (1) -> goto T0_S27
+	od;
+accept_S27:
+	do
+	:: ((eating[0])) -> goto T0_init
+	:: (1) -> goto T0_S27
+	od;
+T0_S27:
+	do
+	:: ((eating[0])) -> goto accept_S20
+	:: (1) -> goto T0_S27
+	:: ((eating[0])) -> goto accept_S27
+	od;
+}

@@ -1,0 +1,1 @@
+ltl  starvation {! [] (((hungry[0] -> <> eating[0]) && (hungry[1] -> <> eating[1]) && (hungry[2] -> <> eating[2]) && (hungry[3] -> <> eating[3])))}
