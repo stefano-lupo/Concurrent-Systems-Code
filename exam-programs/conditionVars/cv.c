@@ -24,7 +24,7 @@ void* worker(void* arg){
         pthread_mutex_lock(&countLock);
 
         // increment counter
-        printf("Worker %i aqquired mutex, incrementing counter to %i\n",threadID,1+counter);
+        printf("Worker %i (%i) aqquired mutex, incrementing counter to %i\n",threadID,i,1+counter);
         counter ++;
 
         // Check if the watcher condition has been reached
@@ -37,8 +37,8 @@ void* worker(void* arg){
         }
         pthread_mutex_unlock(&countLock);
 
-        // sleep for 1 second to allow other thread chance to access data
-        // Otherwise this would blast through all of its 10 incrememnts before other thread starts
+        // sleep for 1 second to allow other producer thread chance to access data
+        // Otherwise this would blast through all of its 10 incrememnts before other thread has even started
         sleep(1);
     }
     printf("Worker thread %i finishing\n\n",threadID);
