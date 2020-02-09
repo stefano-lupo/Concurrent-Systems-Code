@@ -10,6 +10,14 @@
 #define UPPER_BOUND 1
 #define LOWER_BOUND -1
 
+
+/*
+    NOTE
+    This was before we did locking and is actually not fully correct
+    We need a lock on access to totalArea
+    See the numerical integration example in exam-programs for a better version
+*/
+
 double totalArea = 0;
 
 typedef struct myStruct {
@@ -42,6 +50,7 @@ void *compute_dA(void* params) {
     //printf("\nThreadNo %i total = %f\n\n",threadNo,runningArea);
 
     // Add this thread's area to total
+    // NOTE this should be protected by a lock
     totalArea += runningArea;
 	pthread_exit(NULL); 
 } 
